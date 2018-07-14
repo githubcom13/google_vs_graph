@@ -17,7 +17,7 @@ def get_related(entity):
     search_term = quote_plus('{} vs '.format(entity))
     request = urllib.request.Request(url.format(search_term))
     result = urllib.request.urlopen(request)
-    suggestions = json.loads(result.read())
+    suggestions = json.loads(result.read().decode('latin1').encode('utf-8'))
     return [x.replace(suggestions[0],'') for x in suggestions[1] if 'vs' not in x.replace(suggestions[0],'')]
 
 
